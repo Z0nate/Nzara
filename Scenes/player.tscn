@@ -1,12 +1,8 @@
 [gd_scene format=3 uid="uid://cd8cydogdhkg5"]
 
 [ext_resource type="Script" uid="uid://bxj44hikgy4ui" path="res://Scripts/player.gd" id="1_cvnsp"]
-[ext_resource type="Texture2D" uid="uid://pyc47eqjfsyj" path="res://Assets/Slime-Idle.png" id="2_cvnsp"]
+[ext_resource type="Texture2D" uid="uid://pyc47eqjfsyj" path="res://Assets/SlimeIdle.png" id="2_cvnsp"]
 [ext_resource type="Texture2D" uid="uid://6somwgx2dukr" path="res://Assets/Eyes.png" id="3_6t5aa"]
-
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_6t5aa"]
-radius = 4.0
-height = 14.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_cvnsp"]
 atlas = ExtResource("2_cvnsp")
@@ -58,24 +54,28 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_6t5aa"]
+radius = 7.0
+height = 20.0
+
 [node name="Player" type="CharacterBody2D" unique_id=401792681]
 script = ExtResource("1_cvnsp")
 
-[node name="CollisionShape" type="CollisionShape2D" parent="." unique_id=1597889705]
-position = Vector2(0, 3)
-rotation = 1.5707964
-shape = SubResource("CapsuleShape2D_6t5aa")
-
 [node name="Camera" type="Camera2D" parent="." unique_id=468334079]
-zoom = Vector2(5, 5)
+zoom = Vector2(3, 3)
 position_smoothing_enabled = true
 
 [node name="Sprite" type="AnimatedSprite2D" parent="." unique_id=563090492]
-scale = Vector2(0.62499994, 0.625)
 sprite_frames = SubResource("SpriteFrames_x3wgy")
 animation = &"Idle"
 autoplay = "Idle"
 
 [node name="Eyes" type="Sprite2D" parent="." unique_id=1323674798]
-scale = Vector2(0.625, 0.625)
 texture = ExtResource("3_6t5aa")
+
+[node name="CollisionShape" type="CollisionShape2D" parent="." unique_id=1597889705]
+position = Vector2(0, 4)
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_6t5aa")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer2D" parent="." unique_id=1931074098]
