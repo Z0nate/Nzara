@@ -4,6 +4,7 @@ extends CharacterBody2D
 @onready var audio_stream_player = $AudioStreamPlayer
 @onready var slime_jump = load("res://Sounds/slime_jump.wav")
 @onready var slime_land = load("res://Sounds/slime_land.wav")
+@onready var particles = $Dust/Particles
 
 const FOLLOW_RADIUS = 2.0
 const GRAVITY = 800.0
@@ -19,11 +20,15 @@ func _physics_process(delta: float) -> void:
 			stuck = false
 			var dir = (get_global_mouse_position() - global_position).normalized()
 			var dot = dir.dot(-stick_normal)
-			
-			if dot > .2:
+			if dot > 0.2:
 				dir = dir.reflect(stick_normal)
-			
 			velocity = dir * SPEED
+			
+			# Visual Effects
+			particles.emitting = true
+			particles.restart()
+			
+			# Sound Effects
 			audio_stream_player.stream = slime_jump
 			audio_stream_player.play()
 	else:

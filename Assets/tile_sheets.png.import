@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://6somwgx2dukr"
-path="res://.godot/imported/Eyes.png-75e0cdaa23430ccfec17d779662699d8.ctex"
+uid="uid://b4ucu7falybm"
+path="res://.godot/imported/tile_sheets.png-8eb2a9846cb2e16743d4a7f14de45dc7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Eyes.png"
-dest_files=["res://.godot/imported/Eyes.png-75e0cdaa23430ccfec17d779662699d8.ctex"]
+source_file="res://Assets/tile_sheets.png"
+dest_files=["res://.godot/imported/tile_sheets.png-8eb2a9846cb2e16743d4a7f14de45dc7.ctex"]
 
 [params]
 

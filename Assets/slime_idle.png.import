@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cuktl1kljjyqp"
-path="res://.godot/imported/whole map-b1ef_1.png-d395d162dcab2b93abd53b34514b81a5.ctex"
+uid="uid://pyc47eqjfsyj"
+path="res://.godot/imported/slime_idle.png-49ada7a6755e896c5e2b37ae145d3c70.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/whole map-b1ef_1.png"
-dest_files=["res://.godot/imported/whole map-b1ef_1.png-d395d162dcab2b93abd53b34514b81a5.ctex"]
+source_file="res://Assets/slime_idle.png"
+dest_files=["res://.godot/imported/slime_idle.png-49ada7a6755e896c5e2b37ae145d3c70.ctex"]
 
 [params]
 
