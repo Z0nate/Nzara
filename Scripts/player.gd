@@ -77,8 +77,8 @@ func _physics_process(delta: float) -> void:
 		rotation = stick_normal.angle() + PI / 2
 
 		particles.global_position = global_position
-		particles.get_node("Slime").emitting = true
 		particles.get_node("Slime").restart()
+		particles.get_node("Slime").emitting = true
 
 		audio_stream_player.stream = slime_land
 		audio_stream_player.play()
@@ -117,8 +117,8 @@ func _launch(charge_time: float) -> void:
 	var charge_factor = 1.0 + (clamp(charge_time, 0.0, MAX_CHARGE_TIME) / MAX_CHARGE_TIME) * 0.5
 	velocity = final_dir * SPEED * charge_factor
 
-	particles.get_node("Dust").emitting = true
 	particles.get_node("Dust").restart()
+	particles.get_node("Dust").emitting = true
 	audio_stream_player.stream = slime_jump
 	audio_stream_player.play()
 

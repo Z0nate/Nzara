@@ -59,6 +59,9 @@ animations = [{
 radius = 7.0
 height = 20.0
 
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_vgqql"]
+polygon = PackedVector2Array(-5, -3, 5, -3, 8, -1, 10, 2, 10, 4, 10, 6, 8, 9, 5, 11, -5, 11, -8, 9, -10, 6, -10, 4, -10, 2, -8, -1)
+
 [node name="Player" type="CharacterBody2D" unique_id=401792681]
 script = ExtResource("1_cvnsp")
 
@@ -82,3 +85,7 @@ shape = SubResource("CapsuleShape2D_6t5aa")
 [node name="AudioStreamPlayer" type="AudioStreamPlayer2D" parent="." unique_id=1931074098]
 
 [node name="Particles" parent="." unique_id=219439580 instance=ExtResource("4_vgqql")]
+
+[node name="LightOccluder" type="LightOccluder2D" parent="." unique_id=22083886]
+occluder = SubResource("OccluderPolygon2D_vgqql")
+sdf_collision = false
