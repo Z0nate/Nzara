@@ -6,7 +6,7 @@ extends CharacterBody2D
 
 @onready var slime_jump = load("res://Sounds/slime_jump.wav")
 @onready var slime_land = load("res://Sounds/slime_land.wav")
-@onready var particles = $Dust/Particles
+@onready var particles = $Particles
 
 const FOLLOW_RADIUS = 2.0
 const GRAVITY = 800.0
@@ -22,9 +22,9 @@ var charge_timer := 0.0
 var just_launched := false
 var launch_timer := 0.0
 
-var target_camera_zoom = Vector2.ONE * 3
+var target_camera_zoom = 3.0
 
-const LAUNCH_GRACE = 0.1
+const LAUNCH_GRACE = 0
 
 func _physics_process(delta: float) -> void:
 	if just_launched:
@@ -34,7 +34,7 @@ func _physics_process(delta: float) -> void:
 
 	if Input.is_action_just_pressed("ui_accept"):
 		charge_timer = 0.0
-	if Input.is_action_just_released("ui_accept") and charge_timer > 0:
+	if (Input.is_action_just_released("ui_accept") and charge_timer > 0.0) or charge_timer >= MAX_CHARGE_TIME:
 		_launch(charge_timer)
 		charge_timer = 0.0
 
@@ -75,8 +75,14 @@ func _physics_process(delta: float) -> void:
 		var collision = get_slide_collision(0)
 		stick_normal = collision.get_normal()
 		rotation = stick_normal.angle() + PI / 2
+
+		particles.global_position = global_position
+		particles.get_node("Slime").emitting = true
+		particles.get_node("Slime").restart()
+
 		audio_stream_player.stream = slime_land
 		audio_stream_player.play()
+
 		stuck = true
 		stick_timer = 0.0
 		velocity = Vector2.ZERO
@@ -111,15 +117,23 @@ func _launch(charge_time: float) -> void:
 	var charge_factor = 1.0 + (clamp(charge_time, 0.0, MAX_CHARGE_TIME) / MAX_CHARGE_TIME) * 0.5
 	velocity = final_dir * SPEED * charge_factor
 
-	particles.emitting = true
-	particles.restart()
+	particles.get_node("Dust").emitting = true
+	particles.get_node("Dust").restart()
 	audio_stream_player.stream = slime_jump
 	audio_stream_player.play()
 
+func _unhandled_input(event):
+	if event is InputEventKey:
+		if event.pressed and event.keycode == KEY_ESCAPE:
+			get_tree().quit()
+
 func _process(delta: float) -> void:
-	if Input.is_action_pressed("ui_accept"):
+	if get_slide_collision_count() > 0:	
+		if Input.is_action_pressed("ui_accept"):
 			charge_timer += delta
-	target_camera_zoom = 3 + (charge_timer / MAX_CHARGE_TIME) * 0.5
+		target_camera_zoom = 3.0 + (charge_timer / MAX_CHARGE_TIME) * 0.5
+	else:
+		target_camera_zoom = 3.0
 	camera.zoom = camera.zoom.lerp(Vector2.ONE * target_camera_zoom, 0.1)
 
 	var direction = (get_global_mouse_position() - global_position).normalized()
