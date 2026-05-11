@@ -1,0 +1,92 @@
+[gd_scene format=3 uid="uid://bvuiha4tkyrkl"]
+
+[sub_resource type="Curve" id="Curve_cmhku"]
+_limits = [-360.0, 360.0, 0.0, 1.0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_why1w"]
+curve = SubResource("Curve_cmhku")
+
+[sub_resource type="Curve" id="Curve_ts161"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_jme2a"]
+curve = SubResource("Curve_ts161")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_Dust"]
+lifetime_randomness = 1.0
+particle_flag_disable_z = true
+emission_shape_scale = Vector3(5, 5, 5)
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 1.0
+emission_ring_radius = 1.0
+emission_ring_inner_radius = 0.0
+emission_ring_cone_angle = 90.0
+angle_min = -39.99999
+angle_max = 40.00001
+angle_curve = SubResource("CurveTexture_why1w")
+direction = Vector3(0, -1, 0)
+spread = 60.0
+flatness = 1.0
+initial_velocity_min = 91.25
+initial_velocity_max = 200.0
+orbit_velocity_min = 9.49949e-08
+orbit_velocity_max = 9.49949e-08
+gravity = Vector3(0, 800, 0)
+scale_min = 10.0
+scale_max = 10.0
+scale_curve = SubResource("CurveTexture_jme2a")
+collision_mode = 1
+collision_friction = 0.5
+collision_bounce = 0.5
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_Slime"]
+lifetime_randomness = 1.0
+particle_flag_disable_z = true
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 1.0
+emission_ring_radius = 2.0
+emission_ring_inner_radius = 0.0
+emission_ring_cone_angle = 90.0
+angle_min = -40.0
+angle_max = 40.0
+angle_curve = SubResource("CurveTexture_why1w")
+direction = Vector3(0, -1, 0)
+spread = 60.0
+flatness = 1.0
+initial_velocity_min = 91.25
+initial_velocity_max = 200.0
+orbit_velocity_min = 9.49949e-08
+orbit_velocity_max = 9.49949e-08
+gravity = Vector3(0, 800, 0)
+scale_min = 10.0
+scale_max = 10.0
+scale_curve = SubResource("CurveTexture_jme2a")
+collision_mode = 1
+collision_friction = 0.5
+collision_bounce = 0.5
+
+[node name="Particles" type="Node2D" unique_id=219439580]
+top_level = true
+z_index = 9
+
+[node name="Dust" type="GPUParticles2D" parent="." unique_id=1981187098]
+modulate = Color(0.57700837, 0.5770084, 0.57700837, 1)
+emitting = false
+amount = 30
+lifetime = 0.38
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_Dust")
+
+[node name="Slime" type="GPUParticles2D" parent="." unique_id=65122]
+modulate = Color(0.49019086, 0.72365886, 0.3288815, 0.4627451)
+emitting = false
+amount = 30
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_Slime")
