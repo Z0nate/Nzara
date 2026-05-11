@@ -90,3 +90,9 @@ amount = 30
 one_shot = true
 explosiveness = 1.0
 process_material = SubResource("ParticleProcessMaterial_Slime")
+
+[node name="Slime2" type="GPUParticles2D" parent="." unique_id=967456212]
+modulate = Color(0.49019086, 0.72365886, 0.3288815, 0.4627451)
+emitting = false
+amount = 30
+process_material = SubResource("ParticleProcessMaterial_Slime")

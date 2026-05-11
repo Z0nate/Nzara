@@ -101,6 +101,10 @@ func _player_movement(delta: float) -> void:
 	elif sliding:
 		velocity.y += GRAVITY / 8.0 * delta
 		velocity.x = 0.0
+		
+		particles.get_node("Slime2").global_position = global_position
+		particles.get_node("Slime2").emitting = true
+		
 		if not audio_stream_player.playing and wall_slide_playing:
 			wall_slide_delay_timer += delta
 			if wall_slide_delay_timer >= WALL_SLIDE_LOOP_DELAY:
@@ -111,9 +115,11 @@ func _player_movement(delta: float) -> void:
 			var normal = collision.get_normal()
 			if normal.dot(Vector2.UP) > 0.5:
 				_land(normal, false)
+				particles.get_node("Slime2").emitting = false
 				audio_stream_player.stop()
 				wall_slide_playing = false
 		else:
+			particles.get_node("Slime2").emitting = false
 			sliding = false
 			audio_stream_player.stop()
 			wall_slide_playing = false
