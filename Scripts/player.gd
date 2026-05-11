@@ -7,6 +7,7 @@ extends CharacterBody2D
 
 @onready var slime_jump = load("res://Sounds/slime_jump.wav")
 @onready var slime_land = load("res://Sounds/slime_land.wav")
+@onready var slime_long_jump = load("res://Sounds/slime_long_jump.wav")
 @onready var particles = $Particles
 
 const EYE_FOLLOW_RADIUS = 2.0
@@ -156,7 +157,10 @@ func _launch(charge_time: float) -> void:
 	particles.get_node("Dust").restart()
 	particles.get_node("Dust").emitting = true
 
-	audio_stream_player.stream = slime_jump
+	if charge_time > MAX_CHARGE_TIME * 0.5:
+		audio_stream_player.stream = slime_long_jump
+	else:
+		audio_stream_player.stream = slime_jump
 	audio_stream_player.play()
 
 func _unhandled_input(event):
