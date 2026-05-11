@@ -8,13 +8,16 @@ extends CharacterBody2D
 @onready var slime_jump = load("res://Sounds/slime_jump.wav")
 @onready var slime_land = load("res://Sounds/slime_land.wav")
 @onready var slime_long_jump = load("res://Sounds/slime_long_jump.wav")
+@onready var slime_wall_slide_down = load("res://Sounds/slime_wall_slide_down.wav")
 @onready var particles = $Particles
 
 const EYE_FOLLOW_RADIUS = 2.0
 const POINTER_FOLLOW_RADIUS = 25.0
+
 var SPEED = 350.0
 var STICK_TIME = 3.0
 var MAX_CHARGE_TIME = 1
+var MIN_CHARGE_TIME = 0.2
 var GRAVITY: int = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 var stuck := false
@@ -31,17 +34,21 @@ var launch_dir := Vector2.ZERO
 
 var target_camera_zoom = 3.0
 var charging := false
+var wall_slide_playing := false
+var wall_slide_delay_timer := 0.0
+var falling_from_ceiling := false
 
 const LAUNCH_GRACE = 0.0
+const WALL_SLIDE_LOOP_DELAY = 0.3
 
 func _eyes_blink(delta: float) -> void:
 	if charge_timer > 0.0:
 		eyes.frame = 1
 	else:
 		blink_timer += delta
-		if blink_timer >= blink_time:
+		if blink_timer >= blink_time and blink_timer < blink_time + 0.1:
 			eyes.frame = 1
-		if blink_timer >= blink_time + 0.1:
+		elif blink_timer >= blink_time + 0.1:
 			eyes.frame = 0
 			blink_timer = 0.0
 			blink_time = randf_range(3.0, 5.0)
@@ -56,11 +63,12 @@ func _player_movement(delta: float) -> void:
 			just_launched = false
 
 	if Input.is_action_just_pressed("ui_accept"):
-		charging = true
-		charge_timer = 0.0
+		if  stuck or sliding:
+			charging = true
+			charge_timer = 0.0
 	if (Input.is_action_just_released("ui_accept") or charge_timer >= MAX_CHARGE_TIME):
 		charging = false
-		if charge_timer > 0.3:
+		if charge_timer > MIN_CHARGE_TIME:
 			_launch(charge_timer)
 		charge_timer = 0.0
 
@@ -73,9 +81,18 @@ func _player_movement(delta: float) -> void:
 				sliding = true
 				stuck = false
 				velocity += Vector2.DOWN * GRAVITY * delta
+				if not wall_slide_playing:
+					audio_stream_player.stream = slime_wall_slide_down
+					audio_stream_player.play()
+					wall_slide_playing = true
+					wall_slide_delay_timer = 0.0
 		elif surface == "ceiling":
 			stick_timer += delta
 			if stick_timer >= STICK_TIME:
+				if not falling_from_ceiling:
+					audio_stream_player.stream = slime_wall_slide_down
+					audio_stream_player.play()
+					falling_from_ceiling = true
 				stuck = false
 				velocity += Vector2.DOWN * GRAVITY * delta
 		else:
@@ -84,13 +101,22 @@ func _player_movement(delta: float) -> void:
 	elif sliding:
 		velocity.y += GRAVITY / 8.0 * delta
 		velocity.x = 0.0
+		if not audio_stream_player.playing and wall_slide_playing:
+			wall_slide_delay_timer += delta
+			if wall_slide_delay_timer >= WALL_SLIDE_LOOP_DELAY:
+				audio_stream_player.play()
+				wall_slide_delay_timer = 0.0
 		if get_slide_collision_count() > 0:
 			var collision = get_slide_collision(0)
 			var normal = collision.get_normal()
 			if normal.dot(Vector2.UP) > 0.5:
 				_land(normal, false)
+				audio_stream_player.stop()
+				wall_slide_playing = false
 		else:
 			sliding = false
+			audio_stream_player.stop()
+			wall_slide_playing = false
 
 	else:
 		velocity += Vector2.DOWN * GRAVITY * delta
@@ -135,6 +161,7 @@ func _land(normal: Vector2, impact: bool) -> void:
 	stuck = true
 	stick_timer = 0.0
 	velocity = Vector2.ZERO
+	falling_from_ceiling = false
 		
 func _launch(charge_time: float) -> void:
 	if not stuck and not sliding:
@@ -172,11 +199,12 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if stuck or sliding:
 		if charging:
-			camera.shake(charge_timer / MAX_CHARGE_TIME * 10.0, 0.1)
-			charge_timer += delta 
-			pointer.modulate.a = lerpf(pointer.modulate.a, 1.0, 1 - exp(-30 * delta))
+			camera.shake(charge_timer / MAX_CHARGE_TIME * 15.0, 0.1)
+			charge_timer += delta
+			if charge_timer >= MIN_CHARGE_TIME:
+				pointer.modulate.a = lerpf(pointer.modulate.a, 1.0, 1 - exp(-20 * delta))
 		else:
-			pointer.modulate.a = lerpf(pointer.modulate.a, 0.0, 1 - exp(-30 * delta))
+			pointer.modulate.a = lerpf(pointer.modulate.a, 0.0, 1 - exp(-20 * delta))
 		target_camera_zoom = 3.0 + (charge_timer / MAX_CHARGE_TIME) * 0.5
 	else:
 		target_camera_zoom = 3.0
