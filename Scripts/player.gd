@@ -17,7 +17,7 @@ const POINTER_FOLLOW_RADIUS = 25.0
 var SPEED = 350.0
 var STICK_TIME = 3.0
 var MAX_CHARGE_TIME = 1
-var MIN_CHARGE_TIME = 0.2
+var MIN_CHARGE_TIME = 0
 var GRAVITY: int = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 var stuck := false
