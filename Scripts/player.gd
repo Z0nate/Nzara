@@ -73,6 +73,7 @@ func _player_movement(delta: float) -> void:
 		charge_timer = 0.0
 
 	if stuck:
+		particles.get_node("Slime2").emitting = false
 		velocity = Vector2.ZERO
 		var surface := _get_surface_type(stick_normal)
 		if surface == "wall":
