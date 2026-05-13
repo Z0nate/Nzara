@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://i40awxhi80ml"
-path="res://.godot/imported/slime_land.wav-93d5b38b40593b54a38ef09c311a4196.sample"
+path="res://.godot/imported/slime_land.wav-44a5aff63745ee7755fdd67dbc9bf13c.sample"
 
 [deps]
 
-source_file="res://Sounds/slime_land.wav"
-dest_files=["res://.godot/imported/slime_land.wav-93d5b38b40593b54a38ef09c311a4196.sample"]
+source_file="res://Sounds/slime/slime_land.wav"
+dest_files=["res://.godot/imported/slime_land.wav-44a5aff63745ee7755fdd67dbc9bf13c.sample"]
 
 [params]
 

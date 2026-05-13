@@ -230,10 +230,8 @@ func _process(delta: float) -> void:
 	$StaminaBar.progress_value = stamina / max_stamina
 	$ChargeBar.progress_value = charge_timer / MAX_CHARGE_TIME
 
-	var left_pos = Vector2(-24, -4)
-	var right_pos = Vector2(24, -4)
-	$StaminaBar.global_position = global_position + left_pos
-	$ChargeBar.global_position = global_position + right_pos
+	$StaminaBar.global_position = global_position
+	$ChargeBar.global_position = global_position
 
 	if stuck or sliding:
 		if charging:
