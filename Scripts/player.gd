@@ -5,10 +5,10 @@ extends CharacterBody2D
 @onready var audio_stream_player = $AudioStreamPlayer
 @onready var camera = $Camera
 
-@onready var slime_jump = load("res://Sounds/slime_jump.wav")
-@onready var slime_land = load("res://Sounds/slime_land.wav")
-@onready var slime_long_jump = load("res://Sounds/slime_long_jump.wav")
-@onready var slime_wall_slide_down = load("res://Sounds/slime_wall_slide_down.wav")
+@onready var slime_jump = load("res://Sounds/slime/slime_jump.wav")
+@onready var slime_land = load("res://Sounds/slime/slime_land.wav")
+@onready var slime_long_jump = load("res://Sounds/slime/slime_long_jump.wav")
+@onready var slime_wall_slide_down = load("res://Sounds/slime/slime_wall_slide_down.wav")
 @onready var particles = $Particles
 
 const EYE_FOLLOW_RADIUS = 2.0
