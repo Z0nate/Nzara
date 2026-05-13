@@ -4,7 +4,6 @@
 [ext_resource type="PackedScene" uid="uid://fbaxup8r5dws" path="res://Scenes/tile_map_layer.tscn" id="2_bo1nx"]
 
 [node name="Main" type="Node2D" unique_id=763374204]
-position = Vector2(-1, 0)
 
 [node name="Player" parent="." unique_id=401792681 instance=ExtResource("1_jjgbg")]
 z_index = 9
