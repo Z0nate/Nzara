@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cxkiwwvd5manf"
-path="res://.godot/imported/ potato launcher-fc34.png-cfe4d0546ff35b8b8ca5976cd4bc4c54.ctex"
+uid="uid://m7yqiyaijfii"
+path="res://.godot/imported/potato_launcher.png-93fc325acae29a71d2f03a57526fec5a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/ potato launcher-fc34.png"
-dest_files=["res://.godot/imported/ potato launcher-fc34.png-cfe4d0546ff35b8b8ca5976cd4bc4c54.ctex"]
+source_file="res://Assets/potato_launcher.png"
+dest_files=["res://.godot/imported/potato_launcher.png-93fc325acae29a71d2f03a57526fec5a.ctex"]
 
 [params]
 
