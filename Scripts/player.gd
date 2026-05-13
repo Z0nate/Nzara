@@ -4,6 +4,8 @@ extends CharacterBody2D
 @onready var pointer = $Pointer
 @onready var audio_stream_player = $AudioStreamPlayer
 @onready var camera = $Camera
+@onready var stamina_bar = $StaminaBar
+@onready var charge_bar = $ChargeBar
 
 @onready var slime_jump = load("res://Sounds/slime/slime_jump.wav")
 @onready var slime_land = load("res://Sounds/slime/slime_land.wav")
@@ -36,6 +38,7 @@ var stamina: float = 100.0
 var max_stamina: float = 100.0
 var stamina_drain_rate: float = 30.0
 var stamina_regen_rate: float = 20.0
+var stamina_launch_cost: float = 40.0
 
 var target_camera_zoom = 3.0
 var charging := false
@@ -68,10 +71,10 @@ func _player_movement(delta: float) -> void:
 			just_launched = false
 
 	if Input.is_action_just_pressed("ui_accept"):
-		if  stuck or sliding:
+		if (stuck or sliding) and stamina > 0.0:
 			charging = true
 			charge_timer = 0.0
-	if (Input.is_action_just_released("ui_accept") or charge_timer >= MAX_CHARGE_TIME):
+	if (Input.is_action_just_released("ui_accept") or charge_timer >= MAX_CHARGE_TIME or stamina <= 0.0) and charging:
 		charging = false
 		if charge_timer > MIN_CHARGE_TIME:
 			_launch(charge_timer)
@@ -83,6 +86,7 @@ func _player_movement(delta: float) -> void:
 		var surface := _get_surface_type(stick_normal)
 		if surface == "wall":
 			stick_timer += delta
+
 			if stick_timer >= STICK_TIME:
 				sliding = true
 				stuck = false
@@ -107,10 +111,10 @@ func _player_movement(delta: float) -> void:
 	elif sliding:
 		velocity.y += GRAVITY / 8.0 * delta
 		velocity.x = 0.0
-		
+
 		particles.get_node("Slime2").global_position = global_position
 		particles.get_node("Slime2").emitting = true
-		
+
 		if not audio_stream_player.playing and wall_slide_playing:
 			wall_slide_delay_timer += delta
 			if wall_slide_delay_timer >= WALL_SLIDE_LOOP_DELAY:
@@ -174,7 +178,7 @@ func _land(normal: Vector2, impact: bool) -> void:
 	stick_timer = 0.0
 	velocity = Vector2.ZERO
 	falling_from_ceiling = false
-		
+
 func _launch(charge_time: float) -> void:
 	if not stuck and not sliding:
 		return
@@ -184,8 +188,9 @@ func _launch(charge_time: float) -> void:
 	just_launched = true
 	launch_timer = 0.0
 
+	var charge_ratio = clamp(charge_time, 0.0, MAX_CHARGE_TIME) / MAX_CHARGE_TIME
 	var final_dir = _get_launch_direction()
-	charge_factor = 1.0 + (clamp(charge_time, 0.0, MAX_CHARGE_TIME) / MAX_CHARGE_TIME) * 0.5
+	charge_factor = 1.0 + charge_ratio * 0.5
 	velocity = final_dir * SPEED * charge_factor
 
 	charge_timer = 0.0
@@ -209,34 +214,29 @@ func _ready() -> void:
 	pointer.modulate.a = 0.0
 
 func _update_stamina(delta: float) -> void:
-	if stuck:
-		var surface = _get_surface_type(stick_normal)
-		if surface == "floor":
-			stamina = minf(stamina + stamina_regen_rate * delta, max_stamina)
-		else:
-			stamina = maxf(stamina - stamina_drain_rate * delta, 0.0)
-			if stamina <= 0.0 and stuck:
-				stuck = false
-				sliding = true
-				stick_timer = STICK_TIME
-	elif sliding:
-		stamina = maxf(stamina - stamina_drain_rate * delta, 0.0)
-	else:
+	if stuck and _get_surface_type(stick_normal) == "floor":
 		stamina = minf(stamina + stamina_regen_rate * delta, max_stamina)
 
 func _process(delta: float) -> void:
 	_update_stamina(delta)
 
-	$StaminaBar.progress_value = stamina / max_stamina
-	$ChargeBar.progress_value = charge_timer / MAX_CHARGE_TIME
+	var grounded = stuck or sliding
+	var stamina_ratio = stamina / max_stamina
+	var stamina_visible = stamina_ratio < 1.0
 
-	$StaminaBar.global_position = global_position
-	$ChargeBar.global_position = global_position
+	stamina_bar.target_progress = stamina_ratio
+	charge_bar.target_progress = charge_timer / MAX_CHARGE_TIME
 
-	if stuck or sliding:
+	stamina_bar.set_visible_animated(stamina_visible, delta)
+	charge_bar.set_visible_animated(grounded and charging, delta)
+
+	if grounded:
 		if charging:
 			camera.shake(charge_timer / MAX_CHARGE_TIME * 15.0, 0.1)
+
 			charge_timer += delta
+			stamina = maxf(stamina - stamina_drain_rate * 2 * delta, 0.0)
+
 			if charge_timer >= MIN_CHARGE_TIME:
 				pointer.modulate.a = lerpf(pointer.modulate.a, 1.0, 1 - exp(-20 * delta))
 		else:
@@ -245,10 +245,10 @@ func _process(delta: float) -> void:
 	else:
 		target_camera_zoom = 3.0
 		pointer.modulate.a = lerpf(pointer.modulate.a, 0.0, 1 - exp(-10 * delta))
-	
+
 	camera.zoom = camera.zoom.lerp(Vector2.ONE * target_camera_zoom, 1 - exp(-5 * delta))
 
-	launch_dir = _get_launch_direction() if (pointer.modulate.a <= 0.01 or (charging and (stuck or sliding))) else launch_dir
+	launch_dir = _get_launch_direction() if (pointer.modulate.a <= 0.01 or (charging and grounded)) else launch_dir
 	var direction = (get_global_mouse_position() - global_position).normalized()
 	eyes.global_position = global_position + direction * EYE_FOLLOW_RADIUS
 
@@ -262,5 +262,5 @@ func _process(delta: float) -> void:
 	pointer.visible = pointer.modulate.a > 0.01
 
 func _physics_process(delta: float) -> void:
-		_player_movement(delta)
-		_eyes_blink(delta)
+	_player_movement(delta)
+	_eyes_blink(delta)
