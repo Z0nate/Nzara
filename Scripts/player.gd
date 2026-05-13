@@ -32,6 +32,11 @@ var charge_factor := 1.0
 var blink_time := randf_range(3.0, 5.0)
 var launch_dir := Vector2.ZERO
 
+var stamina: float = 100.0
+var max_stamina: float = 100.0
+var stamina_drain_rate: float = 30.0
+var stamina_regen_rate: float = 20.0
+
 var target_camera_zoom = 3.0
 var charging := false
 var wall_slide_playing := false
@@ -203,7 +208,33 @@ func _ready() -> void:
 	pointer.global_position = global_position
 	pointer.modulate.a = 0.0
 
+func _update_stamina(delta: float) -> void:
+	if stuck:
+		var surface = _get_surface_type(stick_normal)
+		if surface == "floor":
+			stamina = minf(stamina + stamina_regen_rate * delta, max_stamina)
+		else:
+			stamina = maxf(stamina - stamina_drain_rate * delta, 0.0)
+			if stamina <= 0.0 and stuck:
+				stuck = false
+				sliding = true
+				stick_timer = STICK_TIME
+	elif sliding:
+		stamina = maxf(stamina - stamina_drain_rate * delta, 0.0)
+	else:
+		stamina = minf(stamina + stamina_regen_rate * delta, max_stamina)
+
 func _process(delta: float) -> void:
+	_update_stamina(delta)
+
+	$StaminaBar.progress_value = stamina / max_stamina
+	$ChargeBar.progress_value = charge_timer / MAX_CHARGE_TIME
+
+	var left_pos = Vector2(-24, -4)
+	var right_pos = Vector2(24, -4)
+	$StaminaBar.global_position = global_position + left_pos
+	$ChargeBar.global_position = global_position + right_pos
+
 	if stuck or sliding:
 		if charging:
 			camera.shake(charge_timer / MAX_CHARGE_TIME * 15.0, 0.1)
