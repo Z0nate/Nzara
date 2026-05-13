@@ -214,7 +214,7 @@ func _ready() -> void:
 	pointer.modulate.a = 0.0
 
 func _update_stamina(delta: float) -> void:
-	if stuck and _get_surface_type(stick_normal) == "floor":
+	if stuck:
 		stamina = minf(stamina + stamina_regen_rate * delta, max_stamina)
 
 func _process(delta: float) -> void:
