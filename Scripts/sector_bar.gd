@@ -7,14 +7,10 @@ extends Control
 
 @export var bar_color: Color = Color(0.3, 0.6, 1.0)
 @export var bar_thickness: float = 6.0
-@export var bar_radius: float = 40.0:
-    set(v):
-        bar_radius = v
-        custom_minimum_size = Vector2.ONE * bar_radius * 2
-        queue_redraw()
+@export var bar_radius: float = 40.0
 
 @export var track_sweep: float = 0.4
-@export var start_angle: float = -PI / 2.0
+@export var start_angle: float = -0.5
 
 @export var border_color: Color = Color(1, 1, 1, 0.4)
 @export var border_width: float = 2.0

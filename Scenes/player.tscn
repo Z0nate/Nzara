@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://bvuiha4tkyrkl" path="res://Scenes/particles.tscn" id="4_vgqql"]
 [ext_resource type="Texture2D" uid="uid://y3sbpdb8vspg" path="res://Assets/pointer.png" id="5_x3wgy"]
 [ext_resource type="Script" uid="uid://c4mpvf0fpcs1j" path="res://Scripts/sector_bar.gd" id="6_bvixh"]
+[ext_resource type="PackedScene" uid="uid://clcvx3arp1ayu" path="res://Scenes/potato_launcher.tscn" id="8_8erm5"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_cvnsp"]
 atlas = ExtResource("2_cvnsp")
@@ -100,10 +101,9 @@ layout_mode = 3
 anchors_preset = 0
 script = ExtResource("6_bvixh")
 bar_color = Color(0.2, 0.5, 1, 1)
-bar_radius = 36.0
 bar_thickness = 4.0
-track_sweep = 0.2
-start_angle = -0.3
+bar_radius = 36.0
+track_sweep = 0.15
 border_color = Color(0, 0, 0, 1)
 border_width = 0.0
 
@@ -115,7 +115,10 @@ script = ExtResource("6_bvixh")
 bar_color = Color(1, 0.85, 0.2, 1)
 bar_thickness = 4.0
 bar_radius = 30.0
-track_sweep = 0.2
-start_angle = -0.3
+track_sweep = 0.15
 border_color = Color(0, 0, 0, 1)
 border_width = 0.0
+
+[node name="PotatoLauncher" parent="." unique_id=1770045549 instance=ExtResource("8_8erm5")]
+z_index = 9
+position = Vector2(16, 0)
