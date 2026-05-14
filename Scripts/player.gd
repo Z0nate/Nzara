@@ -20,10 +20,12 @@ var SPEED = 350.0
 var STICK_TIME = 3.0
 var MAX_CHARGE_TIME = 1
 var MIN_CHARGE_TIME = 0
+var STAMINA_REGEN_DELAY = 1.0
 var GRAVITY: int = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 var stuck := false
 var stick_normal := Vector2.ZERO
+var stuck_timer := 0.0
 var stick_timer := 0.0
 var sliding := false
 var charge_timer := 0.0
@@ -215,7 +217,11 @@ func _ready() -> void:
 
 func _update_stamina(delta: float) -> void:
 	if stuck:
-		stamina = minf(stamina + stamina_regen_rate * delta, max_stamina)
+		stuck_timer += delta
+		if stuck_timer >= STAMINA_REGEN_DELAY:
+			stamina = minf(stamina + stamina_regen_rate * delta, max_stamina)
+	else:
+		stuck_timer = 0.0
 
 func _process(delta: float) -> void:
 	_update_stamina(delta)

@@ -9,5 +9,5 @@ z_as_relative = false
 script = ExtResource("1_lureb")
 
 [node name="Sprite" type="Sprite2D" parent="." unique_id=192802611]
-position = Vector2(12, -6)
+position = Vector2(7, -4)
 texture = ExtResource("1_px1li")
