@@ -6,7 +6,7 @@
 [node name="Main" type="Node2D" unique_id=763374204]
 
 [node name="Player" parent="." unique_id=401792681 instance=ExtResource("1_jjgbg")]
-z_index = 9
+z_index = 12
 position = Vector2(683, 200)
 
 [node name="BackgroundLevel" parent="." unique_id=1463734787 instance=ExtResource("2_bo1nx")]

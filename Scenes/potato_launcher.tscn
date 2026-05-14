@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://clcvx3arp1ayu"]
+
+[ext_resource type="Script" uid="uid://pvrm84slsvqu" path="res://Scripts/potato_launcher.gd" id="1_lureb"]
+[ext_resource type="Texture2D" uid="uid://m7yqiyaijfii" path="res://Assets/potato_launcher.png" id="1_px1li"]
+
+[node name="PotatoLauncher" type="Node2D" unique_id=1770045549]
+z_index = 8
+z_as_relative = false
+script = ExtResource("1_lureb")
+
+[node name="Sprite" type="Sprite2D" parent="." unique_id=192802611]
+position = Vector2(12, -6)
+texture = ExtResource("1_px1li")

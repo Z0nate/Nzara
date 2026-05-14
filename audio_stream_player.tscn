@@ -1,6 +1,0 @@
-[gd_scene format=3 uid="uid://dtmh8nbxio5i0"]
-
-[ext_resource type="AudioStream" uid="uid://f3epptjlekdo" path="res://potato_laucher_v2.wav" id="1_g84o6"]
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" unique_id=1781417759]
-stream = ExtResource("1_g84o6")
