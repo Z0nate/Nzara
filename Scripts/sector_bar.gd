@@ -42,12 +42,11 @@ func _draw():
     if progress_value <= 0.0:
         return
 
-    var progress_angle = total_angle * progress_value
+    var progress_angle = total_angle * (1.0 - progress_value)
     var segments = maxi(int(48 * progress_value), 4)
-    draw_arc(center, track_radius, start_angle, start_angle + progress_angle,
+    draw_arc(center, track_radius, start_angle + progress_angle, end_angle,
              segments, bar_color, bar_thickness)
-    draw_arc(center, outer_radius, start_angle, start_angle + progress_angle,
-             segments, border_color, border_width)
+
 
 func _process(delta: float) -> void:
     rotation = -get_parent().rotation

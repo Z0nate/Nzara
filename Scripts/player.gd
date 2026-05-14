@@ -39,8 +39,7 @@ var launch_dir := Vector2.ZERO
 var stamina: float = 100.0
 var max_stamina: float = 100.0
 var stamina_drain_rate: float = 45.0
-var stamina_regen_rate: float = 20.0
-var stamina_launch_cost: float = 40.0
+var stamina_regen_rate: float = 40.0
 
 var target_camera_zoom = 3.0
 var charging := false
