@@ -38,7 +38,7 @@ var launch_dir := Vector2.ZERO
 
 var stamina: float = 100.0
 var max_stamina: float = 100.0
-var stamina_drain_rate: float = 30.0
+var stamina_drain_rate: float = 45.0
 var stamina_regen_rate: float = 20.0
 var stamina_launch_cost: float = 40.0
 
@@ -241,7 +241,7 @@ func _process(delta: float) -> void:
 			camera.shake(charge_timer / MAX_CHARGE_TIME * 15.0, 0.1)
 
 			charge_timer += delta
-			stamina = maxf(stamina - stamina_drain_rate * 2 * delta, 0.0)
+			stamina = maxf(stamina - stamina_drain_rate * delta, 0.0)
 
 			if charge_timer >= MIN_CHARGE_TIME:
 				pointer.modulate.a = lerpf(pointer.modulate.a, 1.0, 1 - exp(-20 * delta))
