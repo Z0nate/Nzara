@@ -119,4 +119,3 @@ border_width = 0.0
 [node name="PotatoLauncher" parent="." unique_id=1770045549 instance=ExtResource("8_8erm5")]
 z_index = 9
 position = Vector2(16, 0)
-shot_cooldown = 0.3
