@@ -3,9 +3,6 @@
 [ext_resource type="PackedScene" uid="uid://cd8cydogdhkg5" path="res://Scenes/player.tscn" id="1_jjgbg"]
 [ext_resource type="PackedScene" uid="uid://fbaxup8r5dws" path="res://Scenes/tile_map_layer.tscn" id="2_bo1nx"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_bo1nx"]
-size = Vector2(83.5, 26.5)
-
 [node name="Main" type="Node2D" unique_id=763374204]
 
 [node name="Player" parent="." unique_id=401792681 instance=ExtResource("1_jjgbg")]
@@ -25,16 +22,4 @@ tile_map_data = PackedByteArray("AAAIABQAAAACAAkAAAAJABQAAAADAAkAAAAHABQAAAADAAk
 [node name="Props" parent="." unique_id=1970394658 instance=ExtResource("2_bo1nx")]
 modulate = Color(0.60933006, 0.6093301, 0.60933006, 1)
 z_index = 7
-tile_map_data = PackedByteArray("AAAfAAYAAAABAA0AAAAgAAYAAAACAA0AAAAhAAYAAAADAA0AAAA=")
-
-[node name="floating" parent="." unique_id=1851840630 instance=ExtResource("2_bo1nx")]
-modulate = Color(0.60933006, 0.6093301, 0.60933006, 1)
-z_index = 7
 tile_map_data = PackedByteArray()
-
-[node name="StaticBody2D" type="StaticBody2D" parent="floating" unique_id=404240135]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="floating/StaticBody2D" unique_id=1351847980]
-position = Vector2(1201, 201.25)
-shape = SubResource("RectangleShape2D_bo1nx")
-one_way_collision = true

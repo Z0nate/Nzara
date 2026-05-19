@@ -87,7 +87,6 @@ func _player_movement(delta: float) -> void:
 		var surface := _get_surface_type(stick_normal)
 		if surface == "wall":
 			stick_timer += delta
-
 			if stick_timer >= STICK_TIME:
 				sliding = true
 				stuck = false
@@ -142,10 +141,16 @@ func _player_movement(delta: float) -> void:
 
 	move_and_slide()
 
-	if not just_launched and not stuck and not sliding and get_slide_collision_count() > 0:
-		var collision = get_slide_collision(0)
-		var normal = collision.get_normal()
-		_land(normal, true)
+	if not just_launched and not stuck and not sliding:
+		for i in get_slide_collision_count():
+			var collision = get_slide_collision(i)
+			var normal = collision.get_normal()
+
+			if normal.dot(Vector2.UP) < 0.0:
+				continue
+
+			_land(normal, true)
+			break
 
 func _get_surface_type(normal: Vector2) -> String:
 	if normal.dot(Vector2.UP) > 0.5:
@@ -213,6 +218,9 @@ func _unhandled_input(event):
 func _ready() -> void:
 	pointer.global_position = global_position
 	pointer.modulate.a = 0.0
+	up_direction = Vector2.UP
+	floor_max_angle = deg_to_rad(60)
+	floor_snap_length = 0.0
 
 func _update_stamina(delta: float) -> void:
 	if stuck:
