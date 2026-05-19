@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dgyta2yraqtxv"]
 
-[ext_resource type="Texture2D" uid="uid://ga0tr7bjqb1s" path="res://Assets/potato-bullet.png" id="1_mqj5c"]
+[ext_resource type="Texture2D" uid="uid://cevhk1ese0x2p" path="res://Assets/potato.png" id="1_mqj5c"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_d4g48"]
 radius = 6.0
