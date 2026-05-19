@@ -22,4 +22,3 @@ tile_map_data = PackedByteArray("AAAIABQAAAACAAkAAAAJABQAAAADAAkAAAAHABQAAAADAAk
 [node name="Props" parent="." unique_id=1970394658 instance=ExtResource("2_bo1nx")]
 modulate = Color(0.60933006, 0.6093301, 0.60933006, 1)
 z_index = 7
-tile_map_data = PackedByteArray()
