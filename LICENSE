@@ -1,21 +1,38 @@
 MIT License
+Version 1.0, May 2026
 
-Copyright (c) 2026 [Github Users: Z0nate, Binuk1, Trenton-reality, Lakibabi]
+Copyright (c) [Year] [Your Name or Organization]
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+This license governs the use, installation, and distribution of the game "Nzara" (the "Software") made available via GitHub or any associated distribution channels. By downloading, installing, or using the Software, you agree to the terms below.
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+1. GRANT OF RIGHTS
+   a. Free Installation & Personal Use – Any person may download, install, and run the Software on any number of devices for personal, non‑commercial entertainment purposes.
+   b. Free Non‑Commercial Redistribution – You may make verbatim copies of the Software and distribute them to others free of charge, provided that you do not alter any files, do not remove or obscure the copyright notice, and do not charge any fee, royalty, or compensation of any kind.
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
-FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
-DEALINGS IN THE SOFTWARE.
+2. STRICT PROHIBITION OF RESALE AND COMMERCIAL EXPLOITATION
+   a. "Reselling" is defined as: directly or indirectly charging a fee, accepting donations contingent on delivery of the Software, bundling the Software with other goods or services for a price higher than the value of those other goods/services, selling access keys, selling copies on physical media, or any other transaction where the Software is exchanged for money or monetary equivalent.
+   b. You are strictly forbidden to:
+      - Sell, rent, lease, sublicense, or lend the Software or any of its components.
+      - Include the Software in any commercial product, bundle, or service without explicit written permission from the copyright holder.
+      - Use the Software as part of a paid subscription, cloud gaming service, or any platform where users pay to access the Software.
+   c. Any violation of this Section 2 automatically terminates your rights under this license and may subject you to legal action for copyright infringement.
+
+3. MODIFICATIONS AND DERIVATIVE WORKS
+   a. You may modify the Software for your own private use only.
+   b. You may not distribute modified versions of the Software to any third party, whether for free or for a fee, without prior written authorization.
+   c. Any pull requests or contributions submitted to the official Nzara repository are governed by a separate contributor agreement. For personal builds, the prohibition on distribution remains.
+
+4. NO WARRANTY & LIMITATION OF LIABILITY
+   THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NONINFRINGEMENT. IN NO EVENT SHALL THE COPYRIGHT HOLDER BE LIABLE FOR ANY CLAIM, DAMAGES, OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT, OR OTHERWISE, ARISING FROM, OUT OF, OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+5. TERMINATION
+   This license is effective until terminated. Your rights under this license will terminate automatically without notice if you fail to comply with any term. Upon termination, you must destroy all copies of the Software in your possession and cease all use.
+
+6. GOVERNING LAW
+   This license shall be governed by and interpreted in accordance with the laws of [Your Jurisdiction – e.g., the State of Delaware or the country where you reside], without regard to conflict of law principles.
+
+7. RESERVATION OF RIGHTS
+   Nothing in this license grants you any right, title, or interest in the name "Nzara", any associated trademarks, logos, or trade dress. All rights not expressly granted to you are retained by the copyright holder.
+
+---
+You are permitted to install Nzara freely from GitHub and share it with others, as long as no resale or commercial exploitation occurs. For commercial licensing (e.g., featuring Nzara in a paid product), please contact the copyright holder.
