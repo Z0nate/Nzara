@@ -8,8 +8,8 @@ radius = 6.0
 [node name="Potato" type="CharacterBody2D" unique_id=1098997464]
 z_index = 8
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2048482123]
+[node name="Sprite" type="Sprite2D" parent="." unique_id=2048482123]
 texture = ExtResource("1_mqj5c")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=732466372]
+[node name="CollisionShape" type="CollisionShape2D" parent="." unique_id=732466372]
 shape = SubResource("CircleShape2D_d4g48")

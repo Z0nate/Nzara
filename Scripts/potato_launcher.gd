@@ -3,17 +3,23 @@ extends Node2D
 @onready var sprite: Sprite2D = $Sprite
 @onready var launching_point: Node2D = $LaunchingPoint
 @onready var trajectory_line: Line2D = $TrajectoryLine
+
+@onready var camera: Camera2D = get_parent().get_node("Camera")
+
 @onready var potato_scene: PackedScene = preload("res://Scenes/potato.tscn")
-@onready var particles: Node2D = $Particles
+
+@onready var explosion_sound = load("res://Sounds/PotatoLauncher/explosion.mp3")
+
+var particles: Node2D
 
 @export var projectile_speed: float = 600.0
 @export var gravity: float = 900.0
 @export var recoil_distance: float = 12.0
-@export var shot_cooldown: float = 0.3
+@export var shot_cooldown: float = 0.8
 @export var recoil_interpolation_speed: float = 10.0
 @export var rotation_interpolation_speed: float = 12.0
 
-@export_flags_2d_physics var trajectory_collision_mask: int = 1
+@export_flags_2d_physics var trajectory_collision_mask: int = 2
 
 var active_potatoes: Array = []
 var to_remove: Array = []
@@ -27,6 +33,7 @@ func _ready() -> void:
 	trajectory_line.clear_points()
 	screen_size = get_viewport().size
 	base_position = get_parent().global_position
+	cooldown_timer = shot_cooldown
 
 func _process(delta: float) -> void:
 	base_position = get_parent().global_position
@@ -68,7 +75,8 @@ func _process(delta: float) -> void:
 
 func _shoot() -> void:
 	recoil_offset = -recoil_distance
-	cooldown_timer = shot_cooldown
+	cooldown_timer = 0.8
+	print(cooldown_timer)
 	
 	trajectory_line.visible = false
 	particles.get_node("Sparks").restart()
@@ -117,10 +125,32 @@ func _update_potato(potato: CharacterBody2D, delta: float) -> void:
 	potato.global_rotation = lerp_angle(potato.global_rotation, potato_dir.angle(), rotation_interpolation_speed * delta)
 	var collision = potato.move_and_collide(potato.velocity * delta)
 	if collision:
+		play_sound_at_position(potato.global_position, explosion_sound)
+
 		particles.get_node("Explosion").restart()
 		particles.get_node("Explosion").global_position = potato.global_position
 		particles.get_node("Explosion").emitting = true
 
+		particles.get_node("Smoke").restart()
+		particles.get_node("Smoke").global_position = potato.global_position
+		particles.get_node("Smoke").emitting = true
+
+		particles.get_node("Explosion2").global_position = potato.global_position
+		particles.get_node("Explosion2").play()
+
+		camera.shake(15.0, 0.5)
+
 		to_remove.append(potato)
 		potato.queue_free()
 		active_potatoes.erase(potato)
+
+func play_sound_at_position(spawn_position: Vector2, audio_stream: AudioStream) -> void:
+	var audio_player = AudioStreamPlayer2D.new()
+	audio_player.stream = audio_stream
+
+	audio_player.global_position = spawn_position
+	
+	get_parent().add_child(audio_player)
+	
+	audio_player.play()
+	audio_player.finished.connect(audio_player.queue_free)

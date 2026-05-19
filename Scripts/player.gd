@@ -1,17 +1,19 @@
 extends CharacterBody2D
 
 @onready var eyes = $Eyes
-@onready var pointer = $Pointer
-@onready var audio_stream_player = $AudioStreamPlayer
 @onready var camera = $Camera
-@onready var stamina_bar = $StaminaBar
+@onready var pointer = $Pointer
 @onready var charge_bar = $ChargeBar
+@onready var stamina_bar = $StaminaBar
+@onready var potato_launcher = $PotatoLauncher
+@onready var audio_stream_player = $AudioStreamPlayer
 
-@onready var slime_jump = load("res://Sounds/slime/slime_jump.wav")
-@onready var slime_land = load("res://Sounds/slime/slime_land.wav")
-@onready var slime_long_jump = load("res://Sounds/slime/slime_long_jump.wav")
-@onready var slime_wall_slide_down = load("res://Sounds/slime/slime_wall_slide_down.wav")
-@onready var particles = $Particles
+@onready var slime_jump = load("res://Sounds/Slime/slime_jump.wav")
+@onready var slime_land = load("res://Sounds/Slime/slime_land.wav")
+@onready var slime_long_jump = load("res://Sounds/Slime/slime_long_jump.wav")
+@onready var slime_wall_slide_down = load("res://Sounds/Slime/slime_wall_slide_down.wav")
+
+@export var particles: Node2D
 
 const EYE_FOLLOW_RADIUS = 2.0
 const POINTER_FOLLOW_RADIUS = 40.0
@@ -221,6 +223,8 @@ func _ready() -> void:
 	up_direction = Vector2.UP
 	floor_max_angle = deg_to_rad(60)
 	floor_snap_length = 0.0
+
+	potato_launcher.particles = particles
 
 func _update_stamina(delta: float) -> void:
 	if stuck:

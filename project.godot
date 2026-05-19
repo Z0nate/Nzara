@@ -13,7 +13,10 @@ config_version=5
 config/name="Nzara"
 run/main_scene="uid://cmjrqlg6wa6h2"
 config/features=PackedStringArray("4.6", "Mobile")
-config/icon="res://icon.svg"
+
+[display]
+
+window/stretch/aspect="keep_height"
 
 [input]
 

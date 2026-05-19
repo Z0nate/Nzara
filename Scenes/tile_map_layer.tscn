@@ -263,6 +263,7 @@ texture_region_size = Vector2i(32, 32)
 3:13/0 = 0
 3:13/0/physics_layer_0/polygon_0/points = PackedVector2Array(11, -21, -16, -21, -16, -7, 11, -8)
 3:13/0/physics_layer_0/polygon_0/one_way = true
+0:6/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qbaa6"]
 resource_name = "hidden"
@@ -356,17 +357,12 @@ texture_region_size = Vector2i(32, 32)
 4:12/0 = 0
 7:3/0 = 0
 6:3/0 = 0
-7:7/0 = 0
-7:8/0 = 0
-6:9/0 = 0
-6:10/0 = 0
-6:11/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_tto40"]
 tile_size = Vector2i(32, 32)
 occlusion_layer_0/light_mask = 1
 occlusion_layer_0/sdf_collision = true
-physics_layer_0/collision_layer = 1
+physics_layer_0/collision_layer = 3
 sources/0 = SubResource("TileSetAtlasSource_8cujs")
 sources/1 = SubResource("TileSetAtlasSource_qbaa6")
 

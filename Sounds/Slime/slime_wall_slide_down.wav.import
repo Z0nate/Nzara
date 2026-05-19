@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://c6q66jpa1hcqx"
-path="res://.godot/imported/slime_wall_slide_down.wav-66d7db63fdf63c3e95d75884cf555d0f.sample"
+path="res://.godot/imported/slime_wall_slide_down.wav-a9fcca0f64af321cc2e919d8ae062ea1.sample"
 
 [deps]
 
-source_file="res://Sounds/slime/slime_wall_slide_down.wav"
-dest_files=["res://.godot/imported/slime_wall_slide_down.wav-66d7db63fdf63c3e95d75884cf555d0f.sample"]
+source_file="res://Sounds/Slime/slime_wall_slide_down.wav"
+dest_files=["res://.godot/imported/slime_wall_slide_down.wav-a9fcca0f64af321cc2e919d8ae062ea1.sample"]
 
 [params]
 
