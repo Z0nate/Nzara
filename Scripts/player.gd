@@ -14,7 +14,7 @@ extends CharacterBody2D
 @onready var particles = $Particles
 
 const EYE_FOLLOW_RADIUS = 2.0
-const POINTER_FOLLOW_RADIUS = 25.0
+const POINTER_FOLLOW_RADIUS = 40.0
 
 var SPEED = 350.0
 var STICK_TIME = 3.0
@@ -217,7 +217,7 @@ func _ready() -> void:
 func _update_stamina(delta: float) -> void:
 	if stuck:
 		stuck_timer += delta
-		if stuck_timer >= STAMINA_REGEN_DELAY:
+		if stuck_timer >= STAMINA_REGEN_DELAY and not charging:
 			stamina = minf(stamina + stamina_regen_rate * delta, max_stamina)
 	else:
 		stuck_timer = 0.0
