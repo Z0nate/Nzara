@@ -4,6 +4,7 @@ extends Node2D
 @onready var launching_point: Node2D = $LaunchingPoint
 @onready var trajectory_line: Line2D = $TrajectoryLine
 @onready var potato_scene: PackedScene = preload("res://Scenes/potato.tscn")
+@onready var particles: Node2D = $Particles
 
 @export var projectile_speed: float = 600.0
 @export var gravity: float = 900.0
@@ -70,6 +71,9 @@ func _shoot() -> void:
 	cooldown_timer = shot_cooldown
 	
 	trajectory_line.visible = false
+	particles.get_node("Sparks").restart()
+	particles.get_node("Sparks").global_position = launching_point.global_position
+	particles.get_node("Sparks").emitting = true
 	sprite.frame = 1
 
 	var aim_dir = Vector2.from_angle(global_rotation)
@@ -113,6 +117,10 @@ func _update_potato(potato: CharacterBody2D, delta: float) -> void:
 	potato.global_rotation = lerp_angle(potato.global_rotation, potato_dir.angle(), rotation_interpolation_speed * delta)
 	var collision = potato.move_and_collide(potato.velocity * delta)
 	if collision:
+		particles.get_node("Explosion").restart()
+		particles.get_node("Explosion").global_position = potato.global_position
+		particles.get_node("Explosion").emitting = true
+
 		to_remove.append(potato)
 		potato.queue_free()
 		active_potatoes.erase(potato)

@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://pvrm84slsvqu" path="res://Scripts/potato_launcher.gd" id="1_lureb"]
 [ext_resource type="Texture2D" uid="uid://m7yqiyaijfii" path="res://Assets/potato_launcher.png" id="1_px1li"]
+[ext_resource type="PackedScene" uid="uid://bvuiha4tkyrkl" path="res://Scenes/particles.tscn" id="3_nboqf"]
 
 [sub_resource type="Curve" id="Curve_lureb"]
 _data = [Vector2(0, 0.5), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
@@ -31,3 +32,6 @@ width_curve = SubResource("Curve_lureb")
 
 [node name="LaunchingPoint" type="Node2D" parent="." unique_id=95716865]
 position = Vector2(26, -7)
+
+[node name="Particles" parent="." unique_id=219439580 instance=ExtResource("3_nboqf")]
+position = Vector2(-15, 14)
