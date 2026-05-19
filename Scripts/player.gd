@@ -269,3 +269,8 @@ func _process(delta: float) -> void:
 func _physics_process(delta: float) -> void:
 	_player_movement(delta)
 	_eyes_blink(delta)
+
+
+func _input(event: InputEvent):
+	if(event.is_action_pressed("ui_down") && slime_land):
+		position.y+= 1

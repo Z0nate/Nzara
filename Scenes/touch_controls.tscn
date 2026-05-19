@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://cji8a3cdevuy0"]
+
+[ext_resource type="PackedScene" uid="uid://c0kiv5eefdlwj" path="res://systems/joystick/joystick.tscn" id="1_poon4"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_poon4"]
+
+[node name="touch controls" type="CanvasLayer" unique_id=1003776832]
+
+[node name="Joystick" parent="." unique_id=1885096105 instance=ExtResource("1_poon4")]
+offset_left = 51.0
+offset_top = 407.0
+offset_right = -871.0
+offset_bottom = -38.0
+TextureBase = SubResource("CanvasTexture_poon4")
+pressed_color = Color(0.4627451, 0, 0.050980393, 1)
+action_left = "left"
+action_right = "right"
+action_up = "up"
+action_down = "down"
