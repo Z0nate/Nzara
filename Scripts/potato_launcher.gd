@@ -33,7 +33,7 @@ func _ready() -> void:
 	trajectory_line.clear_points()
 	screen_size = get_viewport().size
 	base_position = get_parent().global_position
-	cooldown_timer = shot_cooldown
+	cooldown_timer = 0.0
 
 func _process(delta: float) -> void:
 	base_position = get_parent().global_position
