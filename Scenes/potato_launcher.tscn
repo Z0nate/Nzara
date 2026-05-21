@@ -21,6 +21,7 @@ texture = ExtResource("1_px1li")
 hframes = 2
 
 [node name="TrajectoryLine" type="Line2D" parent="." unique_id=242129637]
+visible = false
 modulate = Color(1, 1, 1, 0.60784316)
 show_behind_parent = true
 top_level = true
@@ -30,3 +31,5 @@ width_curve = SubResource("Curve_lureb")
 
 [node name="LaunchingPoint" type="Node2D" parent="." unique_id=95716865]
 position = Vector2(26, -7)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer2D" parent="." unique_id=2110790911]

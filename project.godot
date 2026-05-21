@@ -14,9 +14,17 @@ config/name="Nzara"
 run/main_scene="uid://cmjrqlg6wa6h2"
 config/features=PackedStringArray("4.6", "Mobile")
 
+[autoload]
+
+Utils="*uid://cd2s7mgyhtrj6"
+
 [display]
 
 window/stretch/aspect="keep_height"
+
+[editor]
+
+version_control/autoload_on_startup=true
 
 [input]
 

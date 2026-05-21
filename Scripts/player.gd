@@ -203,8 +203,7 @@ func _launch(charge_time: float) -> void:
 
 	charge_timer = 0.0
 
-	particles.get_node("Dust").restart()
-	particles.get_node("Dust").emitting = true
+	Utils.emit_particles_at_position(global_position, "Dust2")
 
 	if charge_time > MAX_CHARGE_TIME * 0.5:
 		audio_stream_player.stream = slime_long_jump
